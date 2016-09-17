@@ -17,4 +17,5 @@
     </string>
     <string name="title_activity_pay">PayActivity</string>
     <string name="title_activity_finish">FinishActivity</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>
