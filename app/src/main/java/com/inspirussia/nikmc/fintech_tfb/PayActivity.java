@@ -22,7 +22,9 @@ public class PayActivity extends AppCompatActivity {
     private Spinner mCreditCard;
     private Button btnPay;
     private TextView tvPA,tvSum, tvDate;
-
+    private static final String CYPHER_CODE="scanned Code";
+    private String plainCode;
+    private TextView code;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +45,13 @@ public class PayActivity extends AppCompatActivity {
             }
         });
 
+
+
+
         doInit();
 
-       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,6 +59,11 @@ public class PayActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
+
+        plainCode=getIntent().getStringExtra(CYPHER_CODE);
+
+        code=(TextView) findViewById(R.id.showCode);
+        code.setText(plainCode);
     }
 
     private void doInit(){
