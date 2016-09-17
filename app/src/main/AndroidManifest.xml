@@ -36,6 +36,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".PayActivity"
+            android:label="@string/title_activity_pay"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".FinishActivity"
+            android:label="@string/title_activity_finish"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
