@@ -62,8 +62,8 @@ public class PayActivity extends AppCompatActivity {
 
         plainCode=getIntent().getStringExtra(CYPHER_CODE);
 
-        code=(TextView) findViewById(R.id.showCode);
-        code.setText(plainCode);
+//        code=(TextView) findViewById(R.id.showCode);
+//        code.setText(plainCode);
     }
 
     private void doInit(){
