@@ -33,7 +33,10 @@
         <activity
             android:name=".FinishActivity"
             android:label="@string/title_activity_finish"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ChooseActivity"
+            android:label="@string/title_activity_choose"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

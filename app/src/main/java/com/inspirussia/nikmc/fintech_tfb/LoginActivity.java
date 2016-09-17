@@ -102,7 +102,7 @@ public class LoginActivity extends AppCompatActivity /* implements LoaderCallbac
             public void onClick(View view) {
 //                attemptLogin();
 
-                startActivity(new Intent(LoginActivity.this, PayActivity.class));
+                startActivity(new Intent(LoginActivity.this, ChooseActivity.class));
                 /* switch (typePerson.getCheckedRadioButtonId()){
                     case -1:
                         Toast.makeText(LoginActivity.this, "error ", Toast.LENGTH_SHORT).show();
