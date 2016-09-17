@@ -30,7 +30,8 @@ public class PayActivity extends AppCompatActivity {
             }
         });
 
-        plainCode=getIntent().getDataString();
+        plainCode=getIntent().getStringExtra(CYPHER_CODE);
+
         code=(TextView) findViewById(R.id.showCode);
         code.setText(plainCode);
     }

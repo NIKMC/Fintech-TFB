@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void onPayButtonClick(){
+    public void onPayButtonClick(View view){
         IntentIntegrator scanIntegrator = new IntentIntegrator(this);
         scanIntegrator.initiateScan();
     }
