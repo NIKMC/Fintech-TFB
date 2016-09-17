@@ -12,4 +12,31 @@
     tools:context="com.inspirussia.nikmc.fintech_tfb.MainActivity"
     tools:showIn="@layout/activity_main">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Оплатить"
+        android:id="@+id/buttonPay"
+        android:onClick="onPayButtonClick"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="53dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="действие 2"
+        android:id="@+id/button2"
+        android:layout_below="@+id/buttonPay"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="56dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Действие 3"
+        android:id="@+id/button3"
+        android:layout_below="@+id/button2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp" />
 </RelativeLayout>

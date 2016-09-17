@@ -6,8 +6,13 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 public class PayActivity extends AppCompatActivity {
+
+    private static final String CYPHER_CODE="scanned Code";
+    private String plainCode;
+    private TextView code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +29,10 @@ public class PayActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        plainCode=getIntent().getDataString();
+        code=(TextView) findViewById(R.id.showCode);
+        code.setText(plainCode);
     }
 
 }
