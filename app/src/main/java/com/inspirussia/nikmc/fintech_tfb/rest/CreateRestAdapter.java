@@ -13,7 +13,7 @@ public class CreateRestAdapter {
 
     public static GitHubService getRestAdapterWithoutToken() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.github.com/")
+                .baseUrl("http://40.85.141.154:8083/rest/personal/product/")
                 .build();
 
         GitHubService service = retrofit.create(GitHubService.class);

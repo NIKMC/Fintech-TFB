@@ -13,6 +13,11 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+/*
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+*/
+
 public class MainActivity extends AppCompatActivity {
 
     private Button pay;
@@ -28,7 +33,14 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         pay = (Button) findViewById(R.id.buttonPay);
-        //pay.setOnClickListener(onPayButtonClick());
+        pay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentIntegrator scanIntegrator = new IntentIntegrator(MainActivity.this);
+                scanIntegrator.initiateScan();
+
+            }
+        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -40,9 +52,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void onPayButtonClick(View view){
-        IntentIntegrator scanIntegrator = new IntentIntegrator(this);
-        scanIntegrator.initiateScan();
+    public void onPayButtonClick(){
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {

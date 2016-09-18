@@ -8,37 +8,26 @@ import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.inspirussia.nikmc.fintech_tfb.rest.ServiceGenerator;
+import com.inspirussia.nikmc.fintech_tfb.rest.LoginService;
+
+import java.io.IOException;
+
+import retrofit2.Call;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -102,6 +91,18 @@ public class LoginActivity extends AppCompatActivity /* implements LoaderCallbac
             public void onClick(View view) {
 //                attemptLogin();
 
+/*
+                LoginService loginService =
+                        ServiceGenerator.createService(LoginService.class, mLoginView.getText().toString(), mPasswordView.getText().toString());
+                Call<String> call = loginService.basicLogin();
+                String user = "";
+                try {
+                    user = call.execute().body();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("user =" + user);
+*/
                 startActivity(new Intent(LoginActivity.this, ChooseActivity.class));
                 /* switch (typePerson.getCheckedRadioButtonId()){
                     case -1:

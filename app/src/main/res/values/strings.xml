@@ -16,7 +16,9 @@
         completions."
     </string>
     <string name="title_activity_pay">PayActivity</string>
+    <string name="title_activity_main">LoginActivity</string>
+
     <string name="title_activity_choose">ChooseActivity</string>
     <string name="title_activity_finish">FinishActivity</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main2">MainActivity</string>
 </resources>
