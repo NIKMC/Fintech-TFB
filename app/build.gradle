@@ -4,6 +4,9 @@ android {
     compileSdkVersion 24
     buildToolsVersion "23.0.3"
 
+    android{
+        useLibrary  'org.apache.http.legacy'
+    }
     defaultConfig {
         applicationId "com.inspirussia.nikmc.fintech_tfb"
         minSdkVersion 16
@@ -34,6 +37,8 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:24.2.1'
     compile 'com.journeyapps:zxing-android-embedded:3.0.2@aar'
     compile 'com.google.zxing:core:3.2.0'
+    compile 'org.apache.httpcomponents:httpcore:4.4.1'
+    compile 'org.apache.httpcomponents:httpclient:4.5'
 
 
 }

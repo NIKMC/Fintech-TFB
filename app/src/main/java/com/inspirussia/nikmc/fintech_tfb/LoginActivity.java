@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 
 import com.inspirussia.nikmc.fintech_tfb.rest.ServiceGenerator;
 import com.inspirussia.nikmc.fintech_tfb.rest.LoginService;
+import com.inspirussia.nikmc.fintech_tfb.rest.restRequest;
 
 import java.io.IOException;
 
@@ -90,6 +92,8 @@ public class LoginActivity extends AppCompatActivity /* implements LoaderCallbac
             @Override
             public void onClick(View view) {
 //                attemptLogin();
+                new RequestTasks(mLoginView.getText().toString(),mPasswordView.getText().toString()).execute();
+
 
 /*
                 LoginService loginService =
@@ -386,5 +390,23 @@ public class LoginActivity extends AppCompatActivity /* implements LoaderCallbac
 //            showProgress(false);
 //        }
 //    }
+
+    class RequestTasks extends AsyncTask<Void, Void,Void>{
+
+        String login;
+        String password;
+        public RequestTasks(String login, String password) {
+            this.login = login;
+            this.password = password;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            restRequest rest = new restRequest();
+            rest.signIn(login, password);
+            return null;
+        }
+    }
+
 }
 

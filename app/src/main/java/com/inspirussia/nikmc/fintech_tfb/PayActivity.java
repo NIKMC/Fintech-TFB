@@ -6,10 +6,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.inspirussia.nikmc.fintech_tfb.adapter.SpinnerCardAdapter;
 
@@ -18,11 +20,14 @@ import java.util.List;
 
 public class PayActivity extends AppCompatActivity {
 
+    private static final String TYPE_SCAN = "TYPE_SCAN";
+    private static final String SCAN_GAS = "0";
+    private static final String SCAN_GKH = "1";
 
     private Spinner mCreditCard;
     private Button btnPay;
     private TextView tvPA,tvSum, tvDate;
-    private static final String CYPHER_CODE="scanned Code";
+    private static final String CYPHER_CODE="scanned_сode";
     private String plainCode;
     private TextView code;
     @Override
@@ -47,7 +52,6 @@ public class PayActivity extends AppCompatActivity {
 
 
 
-
         doInit();
 
 
@@ -60,16 +64,43 @@ public class PayActivity extends AppCompatActivity {
             }
         });*/
 
-        plainCode=getIntent().getStringExtra(CYPHER_CODE);
+
 
 //        code=(TextView) findViewById(R.id.showCode);
 //        code.setText(plainCode);
     }
 
     private void doInit(){
-        tvPA.setText("123");
-        tvDate.setText("456");
-        tvSum.setText("789");
+        String plainCode = getIntent().getStringExtra(CYPHER_CODE);
+        Log.d("LOLOL", "type = " + getIntent().getStringExtra(TYPE_SCAN) +"| "+ plainCode);
+        if (getIntent().getStringExtra(TYPE_SCAN).equals(SCAN_GAS)){
+            try {
+                if (plainCode.toCharArray().length > 9) {
+                    tvPA.setText(plainCode.toString().substring(5, 14));
+                    tvSum.setText(Integer.parseInt(plainCode.toString().substring(14, 20)) + "," + Integer.parseInt(plainCode.toString().substring(20, 22)));
+                }
+            }catch (NullPointerException e){
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "No scan data received! Please go back and retry", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        } else if (getIntent().getStringExtra(TYPE_SCAN).equals(SCAN_GKH)){
+            try {
+                if (plainCode.toCharArray().length >9) {
+                    tvPA.setText(plainCode.toString().substring(2, 12));
+                    tvDate.setText(plainCode.toString().substring(12,14) + "/" + plainCode.toString().substring(14,16));
+                    tvSum.setText(Integer.parseInt(plainCode.toString().substring(16,25))+"," + Integer.parseInt(plainCode.toString().substring(25,27)));
+
+                }
+            }catch (NullPointerException e){
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "No scan data received! Please go back and retry", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+
+        }
+
+
         List<String> cards = new ArrayList<>();
         cards.add("счет1");
         cards.add("счет2");
