@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.inspirussia.nikmc.fintech_tfb.adapter.SpinnerCardAdapter;
+import com.inspirussia.nikmc.fintech_tfb.adapter.modelSpinnerElement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,39 +74,39 @@ public class PayActivity extends AppCompatActivity {
     private void doInit(){
         String plainCode = getIntent().getStringExtra(CYPHER_CODE);
         Log.d("LOLOL", "type = " + getIntent().getStringExtra(TYPE_SCAN) +"| "+ plainCode);
-        if (getIntent().getStringExtra(TYPE_SCAN).equals(SCAN_GAS)){
-            try {
-                if (plainCode.toCharArray().length > 9) {
-                    tvPA.setText(plainCode.toString().substring(5, 14));
-                    tvSum.setText(Integer.parseInt(plainCode.toString().substring(14, 20)) + "," + Integer.parseInt(plainCode.toString().substring(20, 22)));
+        if (plainCode.toCharArray().length > 9) {
+
+            if (getIntent().getStringExtra(TYPE_SCAN).equals(SCAN_GAS)) {
+                try {
+                    tvPA.setText(plainCode.toString().substring(5, 13));
+                    tvSum.setText(Integer.parseInt(plainCode.toString().substring(13, 19)) + "," + Integer.parseInt(plainCode.toString().substring(19, 21)));
+                } catch (NullPointerException e) {
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "No scan data received! Please go back and retry", Toast.LENGTH_SHORT);
+                    toast.show();
                 }
-            }catch (NullPointerException e){
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        "No scan data received! Please go back and retry", Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        } else if (getIntent().getStringExtra(TYPE_SCAN).equals(SCAN_GKH)){
-            try {
-                if (plainCode.toCharArray().length >9) {
+            } else if (getIntent().getStringExtra(TYPE_SCAN).equals(SCAN_GKH)) {
+                try {
                     tvPA.setText(plainCode.toString().substring(2, 12));
-                    tvDate.setText(plainCode.toString().substring(12,14) + "/" + plainCode.toString().substring(14,16));
-                    tvSum.setText(Integer.parseInt(plainCode.toString().substring(16,25))+"," + Integer.parseInt(plainCode.toString().substring(25,27)));
+                    tvDate.setText(plainCode.toString().substring(12, 14) + "/" + plainCode.toString().substring(14, 16));
+                    tvSum.setText(Integer.parseInt(plainCode.toString().substring(16, 25)) + "," + Integer.parseInt(plainCode.toString().substring(25, 27)));
 
+                } catch (NullPointerException e) {
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "No scan data received! Please go back and retry", Toast.LENGTH_SHORT);
+                    toast.show();
                 }
-            }catch (NullPointerException e){
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        "No scan data received! Please go back and retry", Toast.LENGTH_SHORT);
-                toast.show();
-            }
 
+            }
+        } else {
+            finish();
         }
 
-
-        List<String> cards = new ArrayList<>();
-        cards.add("счет1");
-        cards.add("счет2");
-        cards.add("счет3");
-        cards.add("счет4");
+        List<modelSpinnerElement> cards = new ArrayList<>();
+        cards.add(new modelSpinnerElement("RUR612.00","7565-XXXX-XXXX-5465","Visa Classic"));
+        cards.add(new modelSpinnerElement("RUR9670.00","2222-XXXX-XXXX-9999","редитная карта +"));
+        cards.add(new modelSpinnerElement("RUR619587.30","42301810600008632868","Текущий"));
+        cards.add(new modelSpinnerElement("RUR124543.00","42303810888800000023","Вклад \\\"Деловой\\\""));
 
         SpinnerCardAdapter adapter = new SpinnerCardAdapter( getApplicationContext(), cards);
         mCreditCard.setAdapter(adapter);

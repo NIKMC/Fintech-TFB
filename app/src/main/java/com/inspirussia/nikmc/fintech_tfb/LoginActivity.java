@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -23,12 +24,24 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.inspirussia.nikmc.fintech_tfb.rest.APIService;
+import com.inspirussia.nikmc.fintech_tfb.rest.RetrofitClient;
 import com.inspirussia.nikmc.fintech_tfb.rest.ServiceGenerator;
 import com.inspirussia.nikmc.fintech_tfb.rest.LoginService;
+import com.inspirussia.nikmc.fintech_tfb.rest.model.Account;
+import com.inspirussia.nikmc.fintech_tfb.rest.model.Card;
+import com.inspirussia.nikmc.fintech_tfb.rest.model.SpinnerElement;
 import com.inspirussia.nikmc.fintech_tfb.rest.restRequest;
 
-import java.io.IOException;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -62,8 +75,10 @@ public class LoginActivity extends AppCompatActivity /* implements LoaderCallbac
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-    private RadioGroup typePerson;
-
+    List<Card> parsedCards;
+    List<Account> parsedAccounts;
+    List<Account> parsedDeposits;
+    List<SpinnerElement> parsedList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +87,6 @@ public class LoginActivity extends AppCompatActivity /* implements LoaderCallbac
         // Set up the login form.
         mLoginView = (AutoCompleteTextView) findViewById(R.id.login);
 //        populateAutoComplete();
-        typePerson = (RadioGroup) findViewById(R.id.typePerson);
 
 
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -91,8 +105,8 @@ public class LoginActivity extends AppCompatActivity /* implements LoaderCallbac
         signIn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-//                attemptLogin();
-                new RequestTasks(mLoginView.getText().toString(),mPasswordView.getText().toString()).execute();
+                attemptLogin();
+//                new RequestTasks(mLoginView.getText().toString(),mPasswordView.getText().toString()).execute();
 
 
 /*
@@ -107,7 +121,7 @@ public class LoginActivity extends AppCompatActivity /* implements LoaderCallbac
                 }
                 System.out.println("user =" + user);
 */
-                startActivity(new Intent(LoginActivity.this, ChooseActivity.class));
+//                startActivity(new Intent(LoginActivity.this, ChooseActivity.class));
                 /* switch (typePerson.getCheckedRadioButtonId()){
                     case -1:
                         Toast.makeText(LoginActivity.this, "error ", Toast.LENGTH_SHORT).show();
@@ -225,6 +239,32 @@ public class LoginActivity extends AppCompatActivity /* implements LoaderCallbac
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
+
+/*
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            RetrofitClient loginService =
+                    APIService.createService(RetrofitClient.class, mLoginView.getText().toString().trim(), mPasswordView.getText().toString().trim());
+            Call<ResponseBody> call = loginService.getAccounts();
+
+
+            try {
+
+                APIService.getInstance().getJson(call.execute());
+                JSONObject jo = APIService.getInstance().getJson(call.execute());
+                parseJson(jo);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+*/
+
+
+            new RequestTasks(login, password).execute();
+
 /*
             mAuthTask = new UserLoginTask(login, password);
             mAuthTask.execute((Void) null);
@@ -391,7 +431,78 @@ public class LoginActivity extends AppCompatActivity /* implements LoaderCallbac
 //        }
 //    }
 
-    class RequestTasks extends AsyncTask<Void, Void,Void>{
+    public void parseJson(JSONObject jsonObject ){
+
+
+        parsedAccounts = new ArrayList<>();
+        parsedCards = new ArrayList<>();
+        parsedDeposits = new ArrayList<>();
+
+        try {
+            JSONArray jsonArray = jsonObject.getJSONArray("accounts");
+            for (int i =0;i < jsonArray.length();i++){
+                Account ac = new Account();
+                JSONObject ob= (JSONObject) jsonArray.get(i);
+                ac.setCurrency(ob.getString("currency"));
+                ac.setBalance(ob.getString("balance"));
+                ac.setFormattedNumber(ob.getString("formattedNumber"));
+                ac.setNumber(ob.getString("number"));
+                ac.setStatusLocale(ob.getString("statusLocale"));
+                ac.setLimit(ob.getString("limit"));
+                ac.setInfo(ob.getString("info"));
+                parsedAccounts.add(ac);
+                parsedList.add(ac);
+                // ac.setBalance(jsonArray.getString(i).g);
+            }
+            JSONArray accounts = jsonObject.getJSONArray("cards");
+            for (int i =0;i< jsonArray.length();i++){
+                Card c= new Card();
+                JSONObject ob= (JSONObject) jsonArray.get(i);
+                c.setCurrency(ob.getString("currency"));
+                c.setBalance(ob.getString("balance"));
+                c.setFormattedNumber(ob.getString("formattedNumber"));
+                c.setNumber(ob.getString("number"));
+                c.setStatusLocale(ob.getString("statusLocale"));
+                c.setLimit(ob.getString("limit"));
+
+                parsedList.add(c);
+                parsedCards.add(c);
+            }
+            JSONArray deposits= jsonObject.getJSONArray("deposits");
+            for (int i =0; i < jsonArray.length();i++){
+                Account account = new Account();
+                JSONObject ob= (JSONObject) jsonArray.get(i);
+                account.setCurrency(ob.getString("currency"));
+                account.setBalance(ob.getString("balance"));
+                account.setInfo(ob.getString("info"));
+                account.setFormattedNumber(ob.getString("formattedNumber"));
+                account.setNumber(ob.getString("number"));
+                account.setStatusLocale(ob.getString("statusLocale"));
+                account.setLimit(ob.getString("limit"));
+                parsedDeposits.add(account);
+                parsedList.add(account);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
+    }
+
+    class RequestTasks extends AsyncTask<Void, JSONObject,JSONObject>{
+        @Override
+        protected void onProgressUpdate(JSONObject... values) {
+            super.onProgressUpdate(values);
+//            parseJson(values[0]);
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject jsonObject) {
+            super.onPostExecute(jsonObject);
+            parseJson(jsonObject);
+            startActivity(new Intent(LoginActivity.this, ChooseActivity.class));
+        }
 
         String login;
         String password;
@@ -401,10 +512,18 @@ public class LoginActivity extends AppCompatActivity /* implements LoaderCallbac
         }
 
         @Override
-        protected Void doInBackground(Void... params) {
+        protected JSONObject doInBackground(Void... params) {
+
+
             restRequest rest = new restRequest();
-            rest.signIn(login, password);
-            return null;
+            JSONObject jsonObject = null;
+            try {
+                jsonObject = new JSONObject(rest.signIn(login, password));
+//                publishProgress(jsonObject);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return jsonObject;
         }
     }
 

@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">Fintech-TFB</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_login">ТАТФОНДБАНК</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_login">Login</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in</string>
-    <string name="action_sign_in_short">Sign in</string>
+    <string name="prompt_login">Логин</string>
+    <string name="prompt_password">Пароль</string>
+    <string name="action_sign_in">Войти</string>
+    <string name="action_sign_in_short">Войти</string>
     <string name="error_invalid_login">This login is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
@@ -15,10 +15,10 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="title_activity_pay">PayActivity</string>
-    <string name="title_activity_main">LoginActivity</string>
+    <string name="title_activity_pay">Оплата</string>
+    <string name="title_activity_main">Авторизаци</string>
 
-    <string name="title_activity_choose">ChooseActivity</string>
-    <string name="title_activity_finish">FinishActivity</string>
-    <string name="title_activity_main2">MainActivity</string>
+    <string name="title_activity_choose">Выбор оплаты</string>
+    <string name="title_activity_finish">Оплата завершена</string>
+    <string name="title_activity_main2">Ошибка</string>
 </resources>

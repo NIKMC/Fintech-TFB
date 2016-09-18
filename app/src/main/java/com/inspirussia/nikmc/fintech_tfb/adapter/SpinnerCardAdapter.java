@@ -15,10 +15,10 @@ import java.util.List;
  */
 public class SpinnerCardAdapter extends BaseAdapter {
     Context context;
-    List<String> creditCards;
+    List<modelSpinnerElement> creditCards;
     LayoutInflater inflater;
 
-    public SpinnerCardAdapter(Context context, List<String> creditCard) {
+    public SpinnerCardAdapter(Context context, List<modelSpinnerElement> creditCard) {
         this.context = context;
         this.creditCards = creditCard;
         inflater = (LayoutInflater) context
@@ -32,7 +32,7 @@ public class SpinnerCardAdapter extends BaseAdapter {
     }
 
     @Override
-    public String getItem(int position) {
+    public modelSpinnerElement getItem(int position) {
         return creditCards.get(position);
     }
 
@@ -49,7 +49,11 @@ public class SpinnerCardAdapter extends BaseAdapter {
         }
 
         TextView mTitle = (TextView)view.findViewById(R.id.card_title);
-        mTitle.setText(creditCards.get(position).toString());
+        TextView mNumber = (TextView)view.findViewById(R.id.card_number);
+        TextView mInfo = (TextView)view.findViewById(R.id.card_info);
+        mTitle.setText(creditCards.get(position).getBalance().toString());
+        mNumber.setText(creditCards.get(position).getNumber().toString());
+        mInfo.setText(creditCards.get(position).getInfo().toString());
         return view;
     }
 
@@ -61,7 +65,11 @@ public class SpinnerCardAdapter extends BaseAdapter {
         }
 
         TextView mTitle = (TextView)view.findViewById(R.id.card_title);
-        mTitle.setText(creditCards.get(position).toString());
+        TextView mNumber = (TextView)view.findViewById(R.id.card_number);
+        TextView mInfo = (TextView)view.findViewById(R.id.card_info);
+        mTitle.setText(creditCards.get(position).getBalance().toString());
+        mNumber.setText(creditCards.get(position).getNumber().toString());
+        mInfo.setText(creditCards.get(position).getInfo().toString());
         return view;
     }
 }

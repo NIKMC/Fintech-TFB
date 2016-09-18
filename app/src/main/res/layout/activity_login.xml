@@ -6,8 +6,7 @@
     android:orientation="vertical"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true"
-
-    tools:context="com.inspirussia.nikmc.fintech_tfb.LoginActivity">
+    tools:context=".LoginActivity">
 
     <!-- Login progress -->
     <ProgressBar
@@ -75,53 +74,9 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <RelativeLayout
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <RadioGroup
-                    android:id="@+id/typePerson"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true">
-
-                    <!--                        android:layout_alignParentTop="true"
-                                            android:layout_alignParentRight="true"
-                                            android:layout_alignParentEnd="true"-->
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Физ. лицо"
-                        android:checked="true"
-                        android:id="@+id/fizPerson"
-                        android:layout_marginBottom="15dp"/>
-
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="Юр. лицо"
-                        android:id="@+id/urPerson"
-
-                        android:checked="false" />
-
-                    <!--                   android:layout_alignParentTop="true"
-                                       android:layout_alignParentLeft="true"
-                                       android:layout_alignParentStart="true"-->
-
-                </RadioGroup>
-
-            </RelativeLayout>
 
             <Button
+                android:layout_marginBottom="20dp"
                 android:id="@+id/btnSignIn"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
@@ -129,7 +84,6 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" />
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

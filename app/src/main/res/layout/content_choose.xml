@@ -59,7 +59,7 @@
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_gravity="center"
-                android:background="@mipmap/ic_launcher"
+                android:background="@drawable/gkx_"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <View
@@ -123,7 +123,7 @@
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_gravity="center"
-                android:background="@mipmap/ic_launcher"
+                android:background="@drawable/gas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <View
@@ -139,7 +139,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="5dp"
                 android:layout_marginRight="5dp"
-                android:text="Купить"
+                android:text="Оплатить"
                 android:textColor="@color/green_colorPrimaryLight"
                 style="?android:attr/borderlessButtonStyle"/>
         </LinearLayout>

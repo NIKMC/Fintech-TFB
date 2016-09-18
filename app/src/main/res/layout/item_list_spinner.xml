@@ -14,4 +14,20 @@
         android:id="@+id/card_title"
         android:textColor="@color/Black"
         android:textSize="16sp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="Счет"
+        android:id="@+id/card_number"
+        android:textColor="@color/Black"
+        android:textSize="16sp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="Счет"
+        android:id="@+id/card_info"
+        android:textColor="@color/Black"
+        android:textSize="16sp"/>
 </LinearLayout>

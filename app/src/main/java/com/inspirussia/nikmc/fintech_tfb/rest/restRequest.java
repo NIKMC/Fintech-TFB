@@ -31,7 +31,7 @@ import okhttp3.internal.http.StatusLine;
 public class restRequest {
 
 
-    public boolean signIn(String login, String password){
+    public String signIn(String login, String password){
         String webPage = "http://40.85.141.154:8083";
 
         String authString = login + ":" + password;
@@ -84,10 +84,8 @@ public class restRequest {
             e.printStackTrace();
         }
 
-
-
-
-return true;
+        //JSONObject jsonObject = new JSONObject(result.toString());
+        return result.toString();
 
 
     }

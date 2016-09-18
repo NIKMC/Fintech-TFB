@@ -11,11 +11,6 @@ import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import com.inspirussia.nikmc.fintech_tfb.rest.CreateRestAdapter;
-import com.inspirussia.nikmc.fintech_tfb.rest.model.cards;
-
-import java.io.IOException;
-import java.util.List;
 
 public class ChooseActivity extends AppCompatActivity {
 
